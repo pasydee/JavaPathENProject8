@@ -7,14 +7,7 @@ import com.openclassrooms.tourguide.user.UserReward;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -95,18 +88,29 @@ public class TourGuideService {
 		return visitedLocation;
 	}
 
-	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
-		List<Attraction> nearbyAttractions = new ArrayList<>();
-		for (Attraction attraction : gpsUtil.getAttractions()) {
-			if (rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
-				nearbyAttractions.add(attraction);
-			}
-		}
+    public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 
-		return nearbyAttractions;
-	}
+        Location userLocation = visitedLocation.location;
 
-	private void addShutDownHook() {
+        List<Map.Entry<Attraction, Double>> attractionDistances = new ArrayList<>();
+
+        for (Attraction attraction : gpsUtil.getAttractions()) {
+            double distance = rewardsService.getDistance(userLocation, attraction);
+            attractionDistances.add(new AbstractMap.SimpleEntry<>(attraction, distance));
+        }
+
+        // Trier par distance croissante
+        attractionDistances.sort(Comparator.comparing(Map.Entry::getValue));
+
+        // Garder les 5 plus proches et retourner uniquement les attractions
+        return attractionDistances.stream()
+                .limit(5)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
+
+    private void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
 				tracker.stopTracking();
