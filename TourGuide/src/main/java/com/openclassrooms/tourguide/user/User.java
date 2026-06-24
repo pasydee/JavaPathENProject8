@@ -68,21 +68,34 @@ public class User {
 	public void clearVisitedLocations() {
 		visitedLocations.clear();
 	}
-	
-	public void addUserReward(UserReward userReward) {
-		if(userRewards.stream().filter(r -> !r.attraction.attractionName.equals(userReward.attraction)).count() == 0) {
-			userRewards.add(userReward);
-		}
-	}
-	
-	public List<UserReward> getUserRewards() {
+
+    public void addUserReward(UserReward userReward) {
+
+        boolean alreadyRewarded = false;
+
+        for (UserReward reward : userRewards) {
+
+
+            if (reward.attraction.attractionName.equals(userReward.attraction.attractionName)) {
+                alreadyRewarded = true;
+                break;
+            }
+        }
+        if (!alreadyRewarded) {
+            userRewards.add(userReward);
+        }
+    }
+
+
+
+    public List<UserReward> getUserRewards() {
 		return userRewards;
 	}
-	
+
 	public UserPreferences getUserPreferences() {
 		return userPreferences;
 	}
-	
+
 	public void setUserPreferences(UserPreferences userPreferences) {
 		this.userPreferences = userPreferences;
 	}
