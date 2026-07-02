@@ -45,9 +45,9 @@ jobs:
 
       - name: Install local dependencies
         run: |
-          mvn install:install-file -Dfile=libs/gpsUtil-1.0.0.jar -DgroupId=gpsUtil -DartifactId=gpsUtil -Dversion=1.0.0 -Dpackaging=jar
-          mvn install:install-file -Dfile=libs/tripPricer-1.0.0.jar -DgroupId=tripPricer -DartifactId=tripPricer -Dversion=1.0.0 -Dpackaging=jar
-          mvn install:install-file -Dfile=libs/rewardCentral-1.0.0.jar -DgroupId=rewardCentral -DartifactId=rewardCentral -Dversion=1.0.0 -Dpackaging=jar
+          mvn install:install-file -Dfile=JavaPathENProject8/libs/gpsUtil-1.0.0.jar -DgroupId=gpsUtil -DartifactId=gpsUtil -Dversion=1.0.0 -Dpackaging=jar
+          mvn install:install-file -Dfile=JavaPathENProject8/libs/tripPricer-1.0.0.jar -DgroupId=tripPricer -DartifactId=tripPricer -Dversion=1.0.0 -Dpackaging=jar
+          mvn install:install-file -Dfile=JavaPathENProject8/libs/rewardCentral-1.0.0.jar -DgroupId=rewardCentral -DartifactId=rewardCentral -Dversion=1.0.0 -Dpackaging=jar
 
       - name: Build and test with Maven
         run: mvn -B clean verify
