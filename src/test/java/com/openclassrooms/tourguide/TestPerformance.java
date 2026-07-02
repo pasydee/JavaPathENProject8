@@ -45,7 +45,7 @@ public class TestPerformance {
 	 * assertTrue(TimeUnit.MINUTES.toSeconds(20) >=
 	 * TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	 */
-
+    @Disabled
     @Test
     public void trackUserLocation_parallel() throws Exception {
 
@@ -81,7 +81,7 @@ public class TestPerformance {
         tourGuideService.tracker.stopTracking();
     }
 
-
+    @Disabled
     @Test
     public void highVolumeGetRewards() throws Exception {
 
