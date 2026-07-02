@@ -21,6 +21,7 @@ import tripPricer.Provider;
 
 public class TestTourGuideService {
 
+
 	@Test
 	public void getUserLocation() {
 		GpsUtil gpsUtil = new GpsUtil();
