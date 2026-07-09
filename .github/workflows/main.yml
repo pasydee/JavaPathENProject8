@@ -9,7 +9,7 @@ jobs:
   build:
     name: Build & Test TourGuide
     runs-on: ubuntu-latest
-    needs: qodana
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
