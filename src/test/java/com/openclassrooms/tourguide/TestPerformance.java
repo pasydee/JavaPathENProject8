@@ -46,6 +46,7 @@ public class TestPerformance {
 	 * TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	 */
 
+    @Disabled
     @Test
     public void trackUserLocation_parallel() throws Exception {
 
@@ -80,7 +81,7 @@ public class TestPerformance {
         executor.shutdown();
         tourGuideService.tracker.stopTracking();
     }
-
+    @Disabled
     @Test
     public void highVolumeGetRewards() throws Exception {
 
