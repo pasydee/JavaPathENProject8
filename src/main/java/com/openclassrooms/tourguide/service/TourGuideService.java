@@ -1,5 +1,6 @@
 package com.openclassrooms.tourguide.service;
 
+import com.openclassrooms.tourguide.dto.NearbyAttractionDTO;
 import com.openclassrooms.tourguide.helper.InternalTestHelper;
 import com.openclassrooms.tourguide.tracker.Tracker;
 import com.openclassrooms.tourguide.user.User;
@@ -116,7 +117,6 @@ public class TourGuideService {
         }
     }
 
-    // ⭐ Version optimisée (utilise attractions déjà chargées)
     public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 
         Location userLocation = visitedLocation.location;
@@ -128,6 +128,29 @@ public class TourGuideService {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
+
+    public List<NearbyAttractionDTO> getNearbyAttractionsDTO(String userName) {
+
+        User user = getUser(userName);
+        VisitedLocation visitedLocation = getUserLocation(user);
+        Location userLocation = visitedLocation.location;
+
+        // On utilise TA méthode existante, intacte
+        List<Attraction> nearby = getNearByAttractions(visitedLocation);
+
+        return nearby.stream()
+                .map(a -> new NearbyAttractionDTO(
+                        a.attractionName,
+                        a.latitude,
+                        a.longitude,
+                        userLocation.latitude,
+                        userLocation.longitude,
+                        rewardsService.getDistance(userLocation, a),
+                        rewardsService.getRewardPoints(a, user)
+                ))
+                .collect(Collectors.toList());
+    }
+
 
     private void addShutDownHook() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> tracker.stopTracking()));
