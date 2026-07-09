@@ -3,15 +3,12 @@ package com.openclassrooms.tourguide;
 import com.openclassrooms.tourguide.dto.NearbyAttractionDTO;
 import com.openclassrooms.tourguide.service.TourGuideService;
 import com.openclassrooms.tourguide.user.User;
-import com.openclassrooms.tourguide.helper.InternalTestHelper;
-import gpsUtil.GpsUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import rewardCentral.RewardCentral;
 
 import java.util.List;
 import java.util.UUID;
