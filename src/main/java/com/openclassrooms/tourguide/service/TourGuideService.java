@@ -101,7 +101,6 @@ public class TourGuideService {
         return providers;
     }
 
-    // ⭐ Version propre et synchrone
     public VisitedLocation trackUserLocation(User user) {
         try {
             VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());

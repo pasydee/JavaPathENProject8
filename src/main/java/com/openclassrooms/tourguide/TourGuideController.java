@@ -45,7 +45,8 @@ public class TourGuideController {
        
     @RequestMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestParam String userName) {
-    	return tourGuideService.getTripDeals(getUser(userName));
+
+    	return tourGuideService.getTripDeals(getUser(userName.trim()));
     }
     
     private User getUser(String userName) {
